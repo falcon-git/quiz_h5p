@@ -44,3 +44,4 @@ function h5p_quiz_question_node_type_insert($info) {
     variable_set('node_submitted_h5p_quiz_question', 0);
   }
 }
+

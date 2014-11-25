@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install logic.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function h5p_quiz_schema() {
+  return array(
+    'h5p_quiz_data' => array(
+      'description' => 'H5p quiz data',
+      'fields' => array(
+        'uid' => array(
+          'description' => 'The user ID this data belongs to.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'question_id' => array(
+          'description' => 'The h5p question id.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'question_vid' => array(
+          'description' => 'The h5p question vid.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'value' => array(
+          'type' => 'text',
+        ),
+      ),
+      'primary key' => array('uid', 'question_id','question_vid'),
+      'indexes' => array(
+        'uid' => array('uid'),
+        'question_id' => array('question_id'),
+        'question_vid' => array('question_vid'),
+      ),
+    ),
+  );
+}

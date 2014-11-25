@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Module hook definitions.
+ */
+
+/**
+ * Implements of hook_quiz_question_info().
+ */
+function h5p_quiz_question_quiz_question_info() {
+  return array(
+    'h5p_quiz_question' => array(
+      'name' => t('H5p Question'),
+      'description' => t('Question using H5p.'),
+      'question provider' => 'H5pQuizQuestion',
+      'response provider' => 'H5pQuizResponse',
+      'module' => 'quiz_question',
+    ),
+  );
+}
+
+/**
+ * Implements hook_config().
+ *
+ * Quiz Question triggers a Fatal Error if this function is not present.
+ * This is a no op.
+ */
+function h5p_quiz_question_config() {
+  // No op
+}
+
+/**
+ * Implements hook_node_type_insert().
+ */
+function h5p_quiz_question_node_type_insert($info) {
+  if ($info->type == 'h5p_quiz_question') {
+    quiz_question_add_body_field('h5p_quiz_question');
+    variable_set('node_options_h5p_quiz_question', array('status'));
+    // Disable comments by default.
+    if (module_exists('comment')) {
+      variable_set('comment_h5p_quiz_question', COMMENT_NODE_CLOSED);
+    }
+    variable_set('node_submitted_h5p_quiz_question', 0);
+  }
+}

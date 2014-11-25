@@ -1,0 +1,9 @@
+name = H5p Quiz Question
+description = Quiz question type for H5p
+core = 7.x
+package = Quiz
+
+dependencies[] = h5p_quiz
+
+files[] = includes/h5p_quiz_question.question.inc
+files[] = includes/h5p_quiz_question.response.inc

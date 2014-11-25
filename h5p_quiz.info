@@ -1,0 +1,4 @@
+name = H5p Quiz
+description = Provides integration for H5p and quiz
+core = 7.x
+package = Quiz

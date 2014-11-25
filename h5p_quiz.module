@@ -1,0 +1,30 @@
+<?php
+
+function h5p_quiz_data_load_score($uid, $question_id, $question_vid) {
+  $data = NULL;
+  $result = db_select('h5p_quiz_data', 'h5pd')
+    ->fields('h5pd', array('value'))
+    ->condition('h5pd.uid', $uid)
+    ->condition('h5pd.question_id', $question_id)
+    ->condition('h5pd.question_id', $question_vid)
+    ->execute()
+    ->fetchObject();
+  if (isset($result->value)) {
+    $data = $result->value;
+  }
+  return $data;
+}
+
+function h5p_quiz_data_set_score($uid, $question_id, $question_vid, $value) {
+  $result = db_merge('h5p_quiz_data')
+    ->key(array(
+      'uid' => $uid,
+      'question_id' => $question_id,
+    ))
+    ->fields(array(
+      'uid' => $uid,
+      'question_id' => $question_id,
+      'value' => $value,
+    ))
+    ->execute();
+}
